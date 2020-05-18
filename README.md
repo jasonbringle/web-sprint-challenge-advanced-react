@@ -29,14 +29,41 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain how to build stateful class components.
+Stateful class components extend react components so they need a constructor to get state into them via the super() call.  This gives us access to "this" so we can call state.  After we do that we need to render/return our dom elements.
 
 2. Describe the different phases of the component lifecycle.
+1. Mounting-
+    Mounting is defined by the component mounting and then immedietly having the constructor looked at followed by rendering the JSX elements.  We can then call a componentDidMount which will trigger whatever functions/calls we place inside of it.
+2. Updating- Updating begins with the render again after it has been called in the mounting phase (through componenDidMount).  The component then goes to the componentDidUpdate phase where it will update the render again...depending on the function/calls happening inside of it.  If no state has been update then the component will wait on state to change before begining the render phase again.  ComponenDidMount will fire again but NOT componentDidMount...(which only triggers the first time the component is triggered)
+3. Unmount-  Unmount is when the component is completely removed from the screen.  This can be forced by the componentWillUnmount being called.
 
 3. Demonstrate an understanding of class component lifecycle methods.
 
+The constructor puts state on the component.  If we wanted to save a todo text then we would use state to store and update input from a user.
+
+Render puts our information on the screen via jsx.  When we want to put the todo on the screen in a visual way we would use JSX in  the render phase to show the information we've selected.
+
+ComponentDidMount is a method which fires after the intial render of the JSX elements.  We can use this method to call data from localStorage or some API to put it in the render phase.
+
+ComponentDidUpdate is a method for updating the information on the page after the initial render and componentDidMount.  This is useful for when we are adding new information to the page without re-rendering the entire page.  componentDidMOunt and componentDidUpdate both only update state where it has changed and do not re-render the entire page again.
+
+componentWillUnmount removes the component from the screen completely and is good for killing timers and listeners.  This basically cancels the component out completely.  No state update will occur.
+
 4. Define stateful logic.
 
+Stateful logic uses state as a means of updating data via certain actions.  A handleChange for an input is an example of this... it uses state to move the input from the  input into the state and then out to the rendered JSX.
+
 5. Describe how to test a React component with React Testing Library.
+
+The syntax goes like this:
+
+test("Name of test that tells us what the test is testing", () => {
+
+    {{We locate elements and function here for testing using a render method on the parent component.  This puts several methods for gathering elements in the DOM.  We can use getByTestId, getByPlaceholderText, and even use the container method that enables us to find elements with a querySelector()
+    }}
+    
+    expect(this is the expected function or values used to create the test).toBe(This is the answer to the test that is correct and establishes that our test works);
+})
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
